@@ -1,5 +1,12 @@
 # redux-most-factory · [![npm](https://img.shields.io/npm/v/redux-most-factory.svg)](https://npm.im/redux-most-factory)
 
+I am tired of managing actions, actions creators and reducers in Redux.
+And luckily I am not alone on this so there are many cool libraries
+that simplify that. I am tired of managing actions, actions creators and
+epics in [`redux-most`](https://github.com/joshburgess/redux-most).
+Well, I guess I am alone on this one so here is it. These 10 lines
+of code cut half of my files with epics, and make me much happier.
+
 ## Table of Contents
 
 - [Install](#install)
@@ -66,4 +73,4 @@ export default epicFactory(epics, '@@epic/');
 
 ## Examples
 
-- [Counter]()
+- [Counter](https://github.com/Vlad-Zhukov/redux-most-factory/tree/master/examples/counter)
