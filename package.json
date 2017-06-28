@@ -31,7 +31,10 @@
     "eslint-plugin-jsx-a11y": "5.1.0",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
+    "most": "^1.5.0",
     "prettier-eslint-cli": "^4.1.1",
+    "redux": "^3.7.1",
+    "redux-most": "^0.5.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1"
