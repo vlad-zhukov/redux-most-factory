@@ -1,0 +1,51 @@
+{
+  "name": "redux-most-factory",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Vlad Zhukov (http://github.com/Vlad-Zhukov)",
+  "license": "MIT",
+  "repository": "Vlad-Zhukov/redux-most-factory",
+  "bugs": {
+    "url": "https://github.com/Vlad-Zhukov/redux-most-factory/issues"
+  },
+  "main": "./dist/redux-most-factory.cjs.js",
+  "module": "./dist/redux-most-factory.esm.js",
+  "jsnext:main": "./dist/redux-most-factory.esm.js",
+  "scripts": {
+    "build": "rimraf dist/ && cross-env NODE_ENV=production rollup -c",
+    "test": "jest",
+    "lint": "eslint \"**/*.js\"",
+    "prettier": "prettier-eslint \"**/*.js\" --write",
+    "prepublishOnly": "yarn run lint && yarn run build && yarn run test"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "5.1.0",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
+    "prettier-eslint-cli": "^4.1.1",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.43.0",
+    "rollup-plugin-babel": "^2.7.1"
+  },
+  "peerDependencies": {
+    "redux-most": "^0.5.*"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "jest": {
+    "roots": [
+      "<rootDir>/__tests__/"
+    ]
+  }
+}
