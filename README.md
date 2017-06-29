@@ -94,6 +94,7 @@ __Arguments__
 
 1. `epics` _(Object)_: An object of functions. Each property key will
 be used as both an action prefixed with a `prefix`, and a name of an
-action creator function.
+action creator function. Action creator can take a single argument
+&ndash; `payload` &ndash; and returns an object that can be dispatched.
 2. `prefix` _(String)_: It will be used to prefix all actions of these
 `epics`.

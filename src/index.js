@@ -9,7 +9,7 @@ export default function epicFactory(epics, prefix) {
     for (let i = 0, l = epicKeys.length; i < l; i++) {
         const key = epicKeys[i];
         const type = `${prefix}${key}`;
-        result[key] = (...args) => ({...args, type});
+        result[key] = payload => ({type, payload});
 
         const filteredEpic = (action$, store) => epics[key](select(type, action$), store);
         epicsToCombine.push(filteredEpic);
