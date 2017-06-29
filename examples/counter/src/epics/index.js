@@ -8,4 +8,4 @@ const epics = {
     decrement: action$ => map(() => ({type: 'DECREMENT'}), action$),
 };
 
-export default epicFactory(epics, '@@epic/');
+export default epicFactory(epics, '@epic/');

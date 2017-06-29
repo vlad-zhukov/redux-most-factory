@@ -1,17 +1,19 @@
 # redux-most-factory · [![npm](https://img.shields.io/npm/v/redux-most-factory.svg)](https://npm.im/redux-most-factory)
 
 I am tired of managing actions, actions creators and reducers in Redux.
-And luckily I am not alone on this so there are many cool libraries
-that simplify that. I am tired of managing actions, actions creators and
-epics in [`redux-most`](https://github.com/joshburgess/redux-most).
-Well, I guess I am alone on this one so here is it. These 10 lines
-of code cut half of my files with epics, and make me much happier.
+Luckily, I am not alone, so there are many cool libraries simplifying
+that. I am also tired of managing actions, actions creators and epics
+in [`redux-most`](https://github.com/joshburgess/redux-most).
+Well, I hope I am alone on this one too, but there are no such libraries
+yet, so here is it. These 10 lines of code cut half of my files with
+epics, and make me much happier.
 
 ## Table of Contents
 
 - [Install](#install)
 - [Usage](#usage)
 - [Examples](#examples)
+- [API](#api)
 
 ## Install
 
@@ -25,48 +27,57 @@ npm install --save redux-most-factory
 
 Instead of doing this:
 
-```jsx
+```js
+import {map} from 'most';
 import {select, combineEpics} from 'redux-most';
 
-const INCREMENT_COUNTER = '@@epic/INCREMENT_COUNTER';
-const DECREMENT_COUNTER = '@@epic/DECREMENT_COUNTER';
+/* Actions */
 
-const incrementCounterEpic = action$ =>
-    select(INCREMENT_COUNTER, action$)
-        .map(() => ({type: 'INCREMENT'}));
+const INCREMENT = '@epic/INCREMENT';
+const DECREMENT = '@epic/DECREMENT';
 
-const decrementCounterEpic = action$ =>
-    select(DECREMENT_COUNTER, action$)
-        .map(() => ({type: 'DECREMENT'}));
+/* Epics */
 
-export const incrementCounter = () => ({
-    type: INCREMENT_COUNTER,
+const incrementEpic = (action$) => {
+    const increment$ = select(INCREMENT, action$);
+    return map(() => ({type: 'INCREMENT'}), increment$);
+}
+
+const decrementEpic = (action$) => {
+    const decrement$ = select(DECREMENT, action$);
+    return map(() => ({type: 'DECREMENT'}), decrement$);
+}
+
+/* Action Creators */
+
+export const increment = () => ({
+    type: INCREMENT,
 });
 
-export const decrementCounter = () => ({
-    type: DECREMENT_COUNTER,
+export const decrement = () => ({
+    type: DECREMENT,
 });
 
-export default combineEpics([incrementCounterEpic, decrementCounterEpic]);
+export default combineEpics([incrementEpic, decrementEpic]);
 ```
 
 You can do this:
 
-```jsx
+```js
 import {map} from 'most';
 import epicFactory from 'redux-most-factory';
 
 const epics = {
-    incrementCounter: action$ => map(() => ({type: 'INCREMENT'}), action$),
-    decrementCounter: action$ => map(() => ({type: 'DECREMENT'}), action$),
+    increment: action$ => map(() => ({type: 'INCREMENT'}), action$),
+    decrement: action$ => map(() => ({type: 'DECREMENT'}), action$),
 };
 
-export default epicFactory(epics, '@@epic/');
+export default epicFactory(epics, '@epic/');
 /*
  * {
  *     epic, // the result of combineEpics
- *     incrementCounter,
- *     decrementCounter,
+ *     increment,
+ *     decrement,
  * }
  */
 ```
@@ -74,3 +85,15 @@ export default epicFactory(epics, '@@epic/');
 ## Examples
 
 - [Counter](https://github.com/Vlad-Zhukov/redux-most-factory/tree/master/examples/counter)
+
+## API
+
+### epicFactory(epics, prefix)
+
+__Arguments__
+
+1. `epics` _(Object)_: An object of functions. Each property key will
+be used as both an action prefixed with a `prefix`, and a name of an
+action creator function.
+2. `prefix` _(String)_: It will be used to prefix all actions of these
+`epics`.
