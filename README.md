@@ -5,8 +5,8 @@ Luckily, I am not alone, so there are many cool libraries simplifying
 that. I am also tired of managing actions, actions creators and epics
 in [`redux-most`](https://github.com/joshburgess/redux-most).
 Well, I hope I am alone on this one too, but there are no such libraries
-yet, so here is it. These 10 lines of code cut half of my files with
-epics, and make me much happier.
+yet, so here is it. These 20 lines of code cut half of my files with
+epics, and make me much happier as a result.
 
 ## Table of Contents
 
@@ -25,7 +25,10 @@ npm install --save redux-most-factory
 
 ## Usage
 
-Instead of doing this:
+First setup the [`redux-most`](https://github.com/joshburgess/redux-most),
+see its documentation on how to do that.
+
+Then instead of doing this:
 
 ```js
 import {map} from 'most';
@@ -84,6 +87,9 @@ export default epicFactory(epics, '@epic/');
 
 ## Examples
 
+A very plain example with `redux-most` and `redux-most-factory`. It's
+for testing purposes mostly.
+
 - [Counter](https://github.com/Vlad-Zhukov/redux-most-factory/tree/master/examples/counter)
 
 ## API
@@ -93,8 +99,9 @@ export default epicFactory(epics, '@epic/');
 __Arguments__
 
 1. `epics` _(Object)_: An object of functions. Each property key will
-be used as both an action prefixed with a `prefix`, and a name of an
-action creator function. Action creator can take a single argument
-&ndash; `payload` &ndash; and returns an object that can be dispatched.
-2. `prefix` _(String)_: It will be used to prefix all actions of these
+be used as both an action type prefixed with a `prefix`, and a name of
+an action creator function. An action creator takes three arguments
+&ndash; `payload`, `error` (defaults to `false`) and `meta` (defaults
+to `null`) &ndash; and returns a dispatchable object (action).
+2. `prefix` _(String)_: It will be used to prefix all actions from the
 `epics`.
